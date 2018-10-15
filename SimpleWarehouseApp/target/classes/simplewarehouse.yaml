@@ -1,0 +1,93 @@
+openapi: 3.0.0
+info:
+  version: 'v1'
+  title: 'Warehouse API'
+  description: 'Simple example showing Amazon Warehouse API is meant to help third-party suppliers with supply chain management'
+  termsOfService: 'http://www.acme.com/termsOfService.html'
+  contact:
+    name: 'Amazon API Support Team'
+    url: 'http://api.acme.com/support.html'
+    email: 'api@api.acme.com'
+  license:
+    name: 'Apache-2.0'
+    url: 'http://www.apache.org/apache.html'
+servers:
+  - url: 'https://api.acme.com/{version}'
+    description: 'Production endpoint'
+    variables:
+      version:
+        default: 'v1'
+  - url: 'https://testapi.acme.com/{version}'
+    description: 'Test endpoint'
+    variables:
+      version:
+        default: 'v2'
+        enum: ['v1','v2']
+paths:
+  /warehouses/{warehouseId}:
+    get:
+      description: 'Get all inventory in warehouses'
+      tags:
+        - 'amazon warehouses'
+      parameters:
+        - $ref: '#/components/parameters/warehouseId'
+      responses:
+        200:
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/warehouse'
+  /warehouses:
+    post:
+      description: 'Create inventory'
+      tags:
+        - 'amazon warehouses'
+      requestBody:
+        description: 'Inventory object'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/inventory'
+      responses:
+        201:
+          description: 'Created'
+components:
+  schemas:
+    warehouse:
+      type: 'object'
+      description: 'warehouse meta-data including location and inventory'
+      properties:
+        warehouseId:
+          description: 'warehouse identifier that identifes its location'
+          type: 'string'
+        inventories:
+          type: 'array'
+          description: 'current inventory of items available in the warehouse'
+          items:
+            $ref: '#/components/schemas/inventory'
+    inventory:
+      type: 'object'
+      description: 'a single inventory object'
+      properties:
+        sku:
+          description: 'stock keeping unit'
+          type: 'string'
+        quantity:
+          description: 'number of available inventory'
+          type: 'integer'
+        location:
+          description: 'barcode location in the warehouse'
+          type: 'string'
+        warehouseId:
+          description: 'warehouse identifier that SKU is located'
+          type: 'integer'
+  parameters:
+    warehouseId:
+      name: warehouseId
+      description: 'identifier for warehouse'
+      in: path
+      required: true
+      schema:
+        type: integer
+        enum: [10001,10002,10003]
