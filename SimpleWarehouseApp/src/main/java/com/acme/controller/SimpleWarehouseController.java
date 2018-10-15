@@ -30,9 +30,9 @@ public class SimpleWarehouseController {
 
         com.acme.model.SimpleWarehouse simpleWarehouse = new com.acme.model.SimpleWarehouse();
         simpleWarehouse.setLocation("Fall River, MA");
-        simpleWarehouse.setQuantity(10);
-        simpleWarehouse.setSku("FFF-X445-001291");
-        simpleWarehouse.setWarehouseId(10001);
+        simpleWarehouse.setQuantity(32);
+        simpleWarehouse.setSku("GGG-T445-001291");
+        simpleWarehouse.setWarehouseId(10002);
 
         return simpleWarehouse;
     }
