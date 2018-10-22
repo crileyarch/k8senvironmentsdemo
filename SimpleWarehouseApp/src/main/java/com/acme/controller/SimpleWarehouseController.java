@@ -29,10 +29,10 @@ public class SimpleWarehouseController {
         logger.info("Returning Spring Boot response");
 
         com.acme.model.SimpleWarehouse simpleWarehouse = new com.acme.model.SimpleWarehouse();
-        simpleWarehouse.setLocation("Charleston, SC");
-        simpleWarehouse.setQuantity(100);
+        simpleWarehouse.setLocation("Fall River, MA");
+        simpleWarehouse.setQuantity(22);
         simpleWarehouse.setSku("XXX-S995-001291");
-        simpleWarehouse.setWarehouseId(10004);
+        simpleWarehouse.setWarehouseId(10001);
 
         return simpleWarehouse;
     }
